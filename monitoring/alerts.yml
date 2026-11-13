@@ -1,0 +1,22 @@
+alerts:
+  - name: pipeline_failed
+    description: Notify the Data Platform Lead when any pipeline phase logs a failed status.
+    severity: high
+    channel: slack_or_email
+  - name: stale_gold_tables
+    description: Alert when Gold tables are older than 24 hours on business days.
+    severity: high
+    channel: slack_or_email
+  - name: quality_score_drop
+    description: Alert when the quality score falls below 95 percent or quarantine records spike above baseline.
+    severity: medium
+    channel: slack_or_email
+  - name: api_latency
+    description: Alert when p95 API latency is above 750ms for dashboard-facing endpoints.
+    severity: medium
+    channel: observability_dashboard
+  - name: copilot_cost_budget
+    description: Alert when estimated daily AI assistant spend reaches 80 percent of budget.
+    severity: medium
+    channel: data_platform
+

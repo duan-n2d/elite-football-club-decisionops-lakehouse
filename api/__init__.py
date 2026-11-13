@@ -1,0 +1,2 @@
+"""FastAPI data product layer."""
+

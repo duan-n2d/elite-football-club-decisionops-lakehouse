@@ -1,0 +1,53 @@
+resources:
+  jobs:
+    elite_football_club_decisionops:
+      name: elite-football-club-decisionops-lakehouse
+      schedule:
+        quartz_cron_expression: "0 0 6 * * ?"
+        timezone_id: "UTC"
+      email_notifications:
+        on_failure:
+          - data-platform-lead@example.com
+      tasks:
+        - task_key: generate_synthetic_sources
+          spark_python_task:
+            python_file: data_generator/generate.py
+            parameters:
+              - "--output"
+              - "/Volumes/club_ops/raw/landing"
+              - "--days"
+              - "60"
+          job_cluster_key: small_job_cluster
+        - task_key: bronze_ingestion
+          depends_on:
+            - task_key: generate_synthetic_sources
+          spark_python_task:
+            python_file: ingestion/load_bronze.py
+            parameters:
+              - "--landing-path"
+              - "/Volumes/club_ops/raw/landing"
+              - "--lakehouse-path"
+              - "/Volumes/club_ops/lakehouse"
+          job_cluster_key: small_job_cluster
+        - task_key: silver_gold_transformations
+          depends_on:
+            - task_key: bronze_ingestion
+          spark_python_task:
+            python_file: transformations/run_transformations.py
+          job_cluster_key: small_job_cluster
+        - task_key: quality_checks
+          depends_on:
+            - task_key: silver_gold_transformations
+          spark_python_task:
+            python_file: quality/run_checks.py
+            parameters:
+              - "--fail-on-error"
+          job_cluster_key: small_job_cluster
+      job_clusters:
+        - job_cluster_key: small_job_cluster
+          new_cluster:
+            spark_version: 15.4.x-scala2.12
+            node_type_id: Standard_DS3_v2
+            num_workers: 2
+            autotermination_minutes: 15
+

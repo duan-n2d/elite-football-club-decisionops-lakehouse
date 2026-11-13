@@ -1,0 +1,21 @@
+bundle:
+  name: elite-football-club-decisionops
+
+include:
+  - ../../orchestration/databricks_job.yml
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: ${var.databricks_host}
+  prod:
+    mode: production
+    workspace:
+      host: ${var.databricks_host}
+
+variables:
+  databricks_host:
+    description: Databricks workspace host URL.
+

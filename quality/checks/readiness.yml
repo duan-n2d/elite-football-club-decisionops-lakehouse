@@ -1,0 +1,12 @@
+suite_name: readiness_gold_suite
+expectations:
+  - expectation_type: expect_column_values_to_be_between
+    kwargs:
+      column: readiness_score
+      min_value: 0
+      max_value: 100
+  - expectation_type: expect_column_values_to_be_in_set
+    kwargs:
+      column: readiness_band
+      value_set: ["ready", "monitor", "managed", "high_risk"]
+

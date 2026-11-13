@@ -1,0 +1,27 @@
+metrics:
+  readiness_score:
+    description: Operational score from workload balance, wellness, and availability. Not a medical diagnosis.
+    table: gold.fact_player_readiness_daily
+    owner: Head of Football Operations
+  matchday_revenue:
+    description: Net ticket and merchandise revenue by fixture, channel, and revenue type.
+    table: gold.fact_matchday_revenue
+    owner: Commercial Director
+  fan_segment:
+    description: Reusable fan segment based on ticket revenue, merchandise revenue, and engagement.
+    table: gold.dim_fan_segment
+    owner: Fan Engagement Manager
+  campaign_performance:
+    description: Daily campaign engagement, click-through rate, and cost per engagement.
+    table: gold.fact_campaign_performance
+    owner: Fan Engagement Manager
+  product_adoption:
+    description: Usage, active users, sessions, and estimated minutes saved by persona and product area.
+    table: gold.fact_product_adoption
+    owner: Data Platform Lead
+guardrails:
+  allowed_layers: ["silver", "gold", "quality", "monitoring"]
+  blocked_topics: ["private fan identity", "medical diagnosis", "salary", "contract details"]
+  max_rows_default: 100
+  require_source_tables: true
+

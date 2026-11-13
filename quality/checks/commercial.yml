@@ -1,0 +1,15 @@
+suite_name: commercial_silver_suite
+expectations:
+  - expectation_type: expect_column_values_to_be_between
+    kwargs:
+      column: price_paid
+      min_value: 0
+  - expectation_type: expect_column_values_to_be_between
+    kwargs:
+      column: net_revenue
+      min_value: 0
+  - expectation_type: expect_column_values_to_be_in_set
+    kwargs:
+      column: channel
+      value_set: ["web", "app", "box_office", "partner", "stadium_store"]
+
