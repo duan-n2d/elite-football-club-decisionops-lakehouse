@@ -7,7 +7,7 @@ from collections.abc import Callable, Iterable
 from datetime import date, timedelta
 from typing import Any
 
-from lakehouse.io import Row, to_float, to_int
+from lakehouse.io import Row, to_float
 
 
 def dedupe_by_key(rows: Iterable[Row], key: str) -> list[Row]:
