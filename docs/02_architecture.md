@@ -35,6 +35,8 @@ The MVP is daily batch because most stakeholder decisions are daily staff meetin
 
 ## Technology Choices
 
+Currently implemented: local files and CSV tables, Python transforms, Python quality checks, FastAPI, Streamlit, optional MLflow logging, GitHub Actions, Docker Compose. Databricks, Delta Lake, ADLS Gen2, MinIO storage, Lakeflow, Unity Catalog, and Great Expectations execution are design targets that are not wired in yet.
+
 - ADLS Gen2 or MinIO/local landing for cloud and local parity.
 - Azure Databricks and Delta Lake for scalable lakehouse production.
 - Local CSV fallback for zero-credential demos.

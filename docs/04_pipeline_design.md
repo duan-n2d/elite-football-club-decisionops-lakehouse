@@ -6,9 +6,9 @@
 |---|---|---|---|
 | data_generator | Synthetic source data | `contracts.py`, `generate.py` | `generate_all` |
 | ingestion | Bronze loading | `load_bronze.py` | `load_incremental`, `load_all_sources` |
-| lakehouse | Runtime config and IO | `config.py`, `io.py`, `spark.py` | `read_table`, `write_table`, `get_spark` |
+| lakehouse | Runtime config and IO | `config.py`, `io.py`, `spark.py` | `read_table`, `write_table`, `get_spark` (not called yet) |
 | transformations | Silver/Gold marts | `build_silver.py`, `build_gold.py` | `build_silver`, `build_gold` |
-| quality | Data checks | `run_checks.py`, `checks/*.yml` | `run_quality_checks` |
+| quality | Data checks | `run_checks.py`, `checks/*.yml` (examples, not executed) | `run_quality_checks` |
 | orchestration | Pipeline runners | `run_pipeline.py`, `airflow_dag.py`, `databricks_job.yml` | `run_pipeline` |
 | api | Data product endpoints | `main.py`, `repository.py` | endpoint handlers |
 | dashboard | Stakeholder UI | `app.py` | Streamlit pages |
@@ -52,7 +52,7 @@ Implemented:
 - Data quality checks.
 - Pipeline run logging.
 - Idempotent reruns.
-- Backfill run metadata using `--from-date`.
+- Backfill run metadata using `--from-date` (recorded in the run log and forces all landing files to be reprocessed; it does not filter by date yet).
 - Observability tables.
 - Alert design in `monitoring/alerts.yml`.
 
